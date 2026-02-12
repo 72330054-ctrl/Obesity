@@ -1,0 +1,1967 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Health Risk Assessment Tool</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Academic Fonts -->
+    <link
+        href="https://fonts.googleapis.com/css2?family=Crimson+Pro:wght@300;400;500;600&family=Source+Sans+Pro:wght@300;400;500;600&family=Merriweather:wght@300;400;500&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
+
+    <!-- styling for first page -->
+    <style>
+        :root {
+            /* Primary Accent Family */
+            --accent-blue: #7E3285;
+            /* main violet-rose */
+            --accent-teal: #9A4FA3;
+            /* softer purple-rose */
+            --accent-warm: #C79AD0;
+            /* light lavender-pink */
+            --accent-plum: #5A1F60;
+            /* deep royal plum */
+
+            /* Neutral Backgrounds */
+            --light-bg: #F8EEF9;
+            /* soft lavender-white */
+            --card-bg: #F8EEF9;
+            --section-bg: #F8EEF9;
+
+            /* Text Colors */
+            --text-dark: #4A1650;
+            /* dark purple text */
+            --text-medium: #7E3285;
+            /* main brand */
+            --text-light: #B98DC1;
+            /* soft muted violet */
+
+            /* Borders */
+            --border-light: #E9CFEF;
+            --border-medium: #C79AD0;
+
+            /* Functional */
+            --success: #9A4FA3;
+            --warning: #C79AD0;
+            --danger: #5A1F60;
+            --info: #7E3285;
+
+            /* System aliases */
+            --primary-color: #7E3285;
+            --primary-hover: #5A1F60;
+            --secondary-color: #9A4FA3;
+            --accent-color: #C79AD0;
+            --bg-color: #F8EEF9;
+            --text-color: #4A1650;
+
+            /* Primary & Secondary */
+            --primary-color: #7E3285;
+            /* main violet-rose */
+            --secondary-color: #9A4FA3;
+            /* softer purple rose */
+
+            /* Status Colors */
+            --danger-color: #5A1F60;
+            /* deep plum */
+            --warning-color: #C79AD0;
+            /* soft lavender highlight */
+
+            /* Light & Dark */
+            --dark-color: #4A1650;
+            /* deep purple text */
+            --light-color: #F8EEF9;
+            /* lavender-white */
+
+            /* Forms */
+            --form-bg: #F8EEF9;
+            --input-border: #9A4FA3;
+            --input-focus: #7E3285;
+
+            /* Academic Spacing */
+            --space-xs: 8px;
+            --space-sm: 16px;
+            --space-md: 24px;
+            --space-lg: 32px;
+            --space-xl: 48px;
+
+            /* Border Radius */
+            --radius-sm: 6px;
+            --radius-md: 10px;
+            --radius-lg: 16px;
+
+            /* Shadows */
+            --shadow-subtle: 0 4px 10px rgba(126, 50, 133, 0.08);
+            --shadow-soft: 0 8px 24px rgba(126, 50, 133, 0.12);
+            --shadow-elevated: 0 16px 40px rgba(126, 50, 133, 0.18);
+
+            /* Transitions */
+            --transition-smooth: 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+
+
+        body {
+            font-family: 'Source Sans Pro', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background-color: var(--light-bg);
+            color: var(--text-medium);
+            line-height: 1.7;
+            font-weight: 400;
+            letter-spacing: 0.01em;
+        }
+
+        .phd-link {
+            text-decoration: none;
+            color: inherit;
+        }
+
+        h1,
+        h2,
+        h3,
+        h4,
+        h5,
+        h6 {
+            font-family: 'Merriweather', 'Times New Roman', serif;
+            font-weight: 500;
+            color: var(--text-dark);
+            letter-spacing: -0.01em;
+        }
+
+        .academic-title {
+            font-family: 'Crimson Pro', 'Times New Roman', serif;
+            font-weight: 600;
+            letter-spacing: -0.02em;
+        }
+
+        .text-serif {
+            font-family: 'Merriweather', 'Times New Roman', serif;
+        }
+
+        .academic-header {
+            background: linear-gradient(135deg, var(--accent-blue) 100%, var(--accent-teal) 0%);
+            color: white;
+            padding: var(--space-xl) 0;
+            margin-bottom: var(--space-xl);
+            border-radius: 0 0 24px 24px;
+            position: relative;
+            overflow: hidden;
+        }
+
+
+        .academic-header h1 {
+            color: white;
+            font-size: 2.5rem;
+            font-weight: 600;
+            margin-bottom: var(--space-sm);
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        .header-subtitle {
+            font-size: 1.2rem;
+            opacity: 0.95;
+            max-width: 700px;
+            margin: 0 auto;
+            font-weight: 300;
+            line-height: 1.6;
+        }
+
+        /* Divider with icon */
+        .header-divider {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: var(--space-md);
+            gap: var(--space-md);
+        }
+
+        .header-divider .line {
+            width: 60px;
+            height: 2px;
+            background: rgba(255, 255, 255, 0.3);
+        }
+
+        .header-divider i {
+            color: rgba(255, 255, 255, 0.7);
+            font-size: 1.2rem;
+        }
+
+        /* Simple badge */
+        .phd-badge {
+            display: inline-block;
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            padding: 10px 24px;
+            border-radius: 8px;
+            font-size: 0.9rem;
+            font-weight: 500;
+            letter-spacing: 0.5px;
+            margin-top: var(--space-md);
+            transition: all 0.3s ease;
+        }
+
+        .phd-badge:hover {
+            background: rgba(255, 255, 255, 0.15);
+            transform: translateY(-2px);
+        }
+
+        /* Health indicators */
+        .health-indicators {
+            display: flex;
+            justify-content: center;
+            gap: var(--space-xl);
+            margin-top: var(--space-lg);
+            padding-top: var(--space-md);
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .indicator-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .indicator-item i {
+            font-size: 1.5rem;
+            color: rgba(255, 255, 255, 0.9);
+            margin-bottom: 4px;
+        }
+
+        .indicator-item small {
+            font-size: 0.85rem;
+            color: rgba(255, 255, 255, 0.8);
+            font-weight: 400;
+            letter-spacing: 0.5px;
+        }
+
+        /* Responsive adjustments */
+        @media (max-width: 768px) {
+            .academic-header h1 {
+                font-size: 2rem;
+            }
+
+            .header-subtitle {
+                font-size: 1rem;
+                padding: 0 15px;
+            }
+
+            .health-indicators {
+                gap: var(--space-lg);
+                flex-wrap: wrap;
+            }
+
+            .phd-badge {
+                padding: 8px 16px;
+                font-size: 0.85rem;
+            }
+        }
+
+        /* Publication-style Text */
+
+
+
+        .form-section {
+            background: var(--card-bg);
+            padding: 30px;
+            border-radius: var(--radius-lg);
+            margin-bottom: 30px;
+            box-shadow: var(--shadow-soft);
+        }
+
+        .form-section h3 {
+            margin-bottom: 20px;
+            color: var(--accent-teal);
+        }
+
+
+
+        .form-group label {
+            font-weight: 600;
+            display: block;
+            margin-bottom: 6px;
+        }
+
+        .form-group input,
+        .form-group select {
+            width: 100%;
+            padding: 12px 14px;
+            border-radius: var(--radius-sm);
+            border: 1px solid var(--border-medium);
+            background: white;
+        }
+
+
+
+
+        .card-header {
+            background: none;
+            border-bottom: 1px solid var(--border-light);
+            padding: 0 0 var(--space-md) 0;
+            margin-bottom: var(--space-lg);
+        }
+
+        .card-header h2 {
+            color: var(--accent-blue);
+            font-size: 1.6rem;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: var(--space-sm);
+        }
+
+
+
+        /* Form Elements - Academic Style */
+        .form-section {
+            background: var(--section-bg);
+            padding: var(--space-lg);
+            border-radius: var(--radius-lg);
+            margin-bottom: var(--space-lg);
+            border: 1px solid var(--border-light);
+        }
+
+        .section-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: var(--space-lg);
+            padding-bottom: var(--space-md);
+            border-bottom: 1px solid var(--border-medium);
+        }
+
+        .section-icon {
+            width: 48px;
+            height: 48px;
+            background: linear-gradient(135deg, var(--accent-blue), var(--accent-teal));
+            color: white;
+            border-radius: var(--radius-md);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: var(--space-md);
+            font-size: 1.2rem;
+        }
+
+        .section-title {
+            font-family: 'Merriweather', serif;
+            font-size: 1.4rem;
+            font-weight: 600;
+            color: var(--text-dark);
+            margin: 0;
+        }
+
+        .form-label {
+            font-weight: 700;
+            color: var(--text-dark);
+            margin-bottom: var(--space-sm);
+            font-size: 1rem;
+            display: flex;
+            align-items: center;
+            gap: var(--space-xs);
+        }
+
+        .form-label i {
+            color: var(--accent-blue);
+        }
+
+        .form-control,
+        .form-select {
+            padding: 14px 16px;
+            border: 1.5px solid var(--border-medium);
+            border-radius: var(--radius-md);
+            background: var(--card-bg);
+            color: var(--text-dark);
+            font-size: 1rem;
+            transition: var(--transition-smooth);
+            font-family: 'Source Sans Pro', sans-serif;
+        }
+
+        .form-control:focus,
+        .form-select:focus {
+            border-color: var(--accent-blue);
+            box-shadow: 0 0 0 3px rgba(74, 111, 165, 0.1);
+            outline: none;
+        }
+
+        .form-control::placeholder {
+            color: var(--text-light);
+            font-style: italic;
+        }
+    </style>
+
+
+    <style>
+        .ai-glass {
+            background: white;
+            /* backdrop-filter: blur(90px); */
+            border-radius: 20px;
+            border: 1px solid var(--border-light);
+            box-shadow: 0 20px 50px rgba(147, 59, 91, 0.12);
+            overflow: hidden;
+        }
+
+
+
+        /* model */
+        .model-chip {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            font-weight: 600;
+        }
+
+        .model-icon {
+            width: 38px;
+            height: 38px;
+            background: linear-gradient(135deg,
+                    var(--accent-blue),
+                    var(--accent-plum));
+            color: white;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        /* score */
+        .score-pill {
+            background: rgba(147, 59, 91, 0.1);
+            color: var(--accent-blue);
+            padding: 6px 14px;
+            border-radius: 999px;
+            font-weight: 700;
+        }
+
+        /* risk */
+        .risk {
+            padding: 6px 16px;
+            border-radius: 999px;
+            font-weight: 600;
+        }
+
+        .risk.low {
+            background: rgba(201, 122, 136, .15);
+            color: var(--success);
+        }
+
+        .risk.mid {
+            background: rgba(214, 154, 162, .2);
+            color: var(--warning);
+        }
+
+        .risk.high {
+            background: rgba(147, 59, 91, .18);
+            color: var(--danger);
+        }
+
+        /* difference */
+        .diff {
+            font-weight: 700;
+        }
+
+        .diff.good {
+            color: var(--success);
+        }
+
+        .diff.bad {
+            color: var(--danger);
+        }
+
+        .diff.neutral {
+            color: var(--text-light);
+        }
+
+        .ai-card {
+            margin-top: 40px;
+            padding: 24px;
+            border-radius: 16px;
+            background: linear-gradient(135deg, #F5E6E9, #F1D7DE);
+            border: 1px solid #E0AEB9;
+            box-shadow: 0 12px 30px rgba(147, 59, 91, 0.15);
+            max-width: 930px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .ai-header {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 12px;
+        }
+
+        .ai-dot {
+            width: 10px;
+            height: 10px;
+            background: #7E3285;
+            border-radius: 50%;
+            animation: pulse 1.5s infinite;
+        }
+
+        @keyframes pulse {
+            0% {
+                opacity: 0.3;
+            }
+
+            50% {
+                opacity: 1;
+            }
+
+            100% {
+                opacity: 0.3;
+            }
+        }
+
+        .ai-header h3 {
+            color: #7E3285;
+            font-weight: 600;
+        }
+
+        .ai-text {
+            font-size: 16px;
+            line-height: 1.7;
+            color: #4A2C33;
+            white-space: pre-line;
+        }
+
+
+
+
+        .calculator-card {
+            border: none;
+            border-radius: 15px;
+            box-shadow: 0 6px 18px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease;
+            margin-bottom: 2rem;
+            overflow: hidden;
+        }
+
+        .card-header {
+            background: linear-gradient(to right, var(--primary-color), var(--secondary-color));
+            color: white;
+            border-radius: 15px 15px 0 0 !important;
+            padding: 1.5rem;
+        }
+
+
+
+        .btn-total {
+            background-color: var(--primary-color);
+            color: white;
+            padding: 15px 20px;
+            font-weight: 600;
+            border-radius: 8px;
+            transition: all 0.3s ease;
+            border: none;
+            width: 100%;
+        }
+
+        .btn-total:hover {
+            background-color: var(--secondary-color);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(78, 115, 223, 0.3);
+            color: white;
+        }
+
+        /* selection-card */
+        .selection-card {
+            background-color: white;
+            border-radius: 12px;
+            padding: 15px;
+            border: 2px solid var(--primary-light);
+            transition: var(--transition);
+            height: 100%;
+        }
+
+        .selection-card:hover {
+            border-color: var(--primary-color);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+        }
+
+        .selection-card label {
+            font-weight: 600;
+            color: var(--dark-color);
+            margin-bottom: 10px;
+            display: block;
+        }
+
+        .selection-card select {
+            width: 100%;
+            padding: 10px 15px;
+            border-radius: 8px;
+            border: 1px solid var(--input-border);
+            background: white;
+            transition: var(--transition);
+        }
+
+        .selection-card select:focus {
+            border-color: var(--input-focus);
+            box-shadow: 0 0 0 3px rgba(147, 197, 253, 0.3);
+            outline: none;
+        }
+
+
+        /* Improved Form Styling */
+        .form-section {
+            background: var(--form-bg);
+            padding: 20px;
+            border-radius: 12px;
+            margin-bottom: 25px;
+
+        }
+
+        .form-label {
+            font-weight: 600;
+            color: var(--dark-color);
+            margin-bottom: 8px;
+            display: flex;
+            align-items: center;
+        }
+
+        .form-label i {
+            margin-right: 8px;
+            color: var(--primary-color);
+        }
+
+        .form-control,
+        .form-select {
+            padding: 14px 16px;
+            border: 2px solid var(--primary-light);
+            border-radius: 12px;
+            transition: var(--transition);
+            background-color: white;
+            font-size: 1rem;
+        }
+
+        .form-control:focus,
+        .form-select:focus {
+            border-color: var(--input-focus);
+            box-shadow: 0 0 0 3px rgba(147, 197, 253, 0.3);
+        }
+
+        /* .form-control:focus, .form-select:focus {
+            border-color: var(--input-focus);
+            
+        }  */
+        input.form-control:-webkit-autofill,
+        input.form-control:-webkit-autofill:focus,
+        input.form-control:-webkit-autofill:hover,
+        input.form-control:-webkit-autofill:active {
+            -webkit-box-shadow: 0 0 0px 1000px white inset !important;
+            box-shadow: 0 0 0px 1000px white inset !important;
+
+        }
+
+        input.form-control {
+            background-color: white !important;
+            /* Ensures default bg */
+        }
+
+        .input-group {
+            /* box-shadow: 0 2px 6px rgba(0, 0, 0, 0.08); */
+            border-radius: 8px;
+            overflow: hidden;
+        }
+
+
+
+        .input-group .form-control {
+            border-left: none;
+            box-shadow: none;
+        }
+
+        /* Improved Range Sliders */
+        .form-range-container {
+            background: white;
+            padding: 20px;
+            border-radius: 12px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+            margin-bottom: 20px;
+        }
+
+        .form-range {
+            height: 8px;
+            background: #e5e7eb;
+            border-radius: 4px;
+        }
+
+        .form-range::-webkit-slider-thumb {
+            background: var(--primary-color);
+            width: 20px;
+            height: 20px;
+            /* border: 2px solid white; */
+            /* box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15); */
+        }
+
+        .form-range::-moz-range-thumb {
+            background: var(--primary-color);
+            width: 20px;
+            height: 20px;
+            /* border: 2px solid white; */
+            /* box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15); */
+            border-radius: 50%;
+        }
+
+        .range-labels {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 8px;
+            font-size: 0.85rem;
+            color: #6b7280;
+        }
+
+
+
+        /* Improved Toggle Switches */
+        .toggle-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 15px;
+            margin-bottom: 20px;
+        }
+
+        .toggle-card {
+            background: white;
+            border: 2px solid transparent;
+            border-radius: 10px;
+            padding: 15px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+        .toggle-card:hover {
+            border-color: var(--input-focus);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.08);
+        }
+
+
+
+        .toggle-content {
+            display: flex;
+            align-items: center;
+        }
+
+        .toggle-icon {
+            width: 40px;
+            height: 40px;
+            background: #f1f5f9;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 12px;
+            color: var(--primary-color);
+            font-size: 18px;
+        }
+
+        .toggle-text {
+            font-weight: 500;
+        }
+
+        .toggle-switch {
+            position: relative;
+            width: 50px;
+            height: 26px;
+        }
+
+        .toggle-switch input {
+            opacity: 0;
+            width: 0;
+            height: 0;
+        }
+
+        .slider {
+            position: absolute;
+            cursor: pointer;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: #ccc;
+            transition: .4s;
+            border-radius: 34px;
+        }
+
+        .slider:before {
+            position: absolute;
+            content: "";
+            height: 18px;
+            width: 18px;
+            left: 4px;
+            bottom: 4px;
+            background-color: white;
+            transition: .4s;
+            border-radius: 50%;
+        }
+
+        input:checked+.slider {
+            background-color: var(--primary-color);
+        }
+
+        input:checked+.slider:before {
+            transform: translateX(24px);
+        }
+
+        /* Section Headers */
+        .section-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid #e5e7eb;
+        }
+
+        .section-icon {
+            background: var(--primary-color);
+            color: white;
+            width: 40px;
+            height: 40px;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 12px;
+            font-size: 18px;
+        }
+
+        .section-title {
+            font-weight: 600;
+            color: var(--dark-color);
+            margin: 0;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+
+
+
+        .progress {
+            height: 25px;
+            border-radius: 12px;
+            margin-bottom: 20px;
+        }
+
+        .progress-bar {
+            background: linear-gradient(to right, var(--secondary-color), var(--warning-color), var(--danger-color));
+        }
+
+        @media (max-width: 768px) {
+            .toggle-container {
+                grid-template-columns: 1fr;
+            }
+
+            .form-section {
+                padding: 15px;
+            }
+        }
+
+        .result-cardd {
+            background: white;
+            border-radius: 16px;
+            padding: 20px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.06);
+            border: 1px solid #eee;
+            max-width: 450px;
+            font-family: "Inter", sans-serif;
+
+        }
+
+        .cardd-headerr {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 15px;
+        }
+
+        .icon-box {
+            width: 36px;
+            height: 36px;
+            border-radius: 10px;
+            background: linear-gradient(135deg, #10b981, #14b8a6);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .icon-box svg {
+            width: 18px;
+            height: 18px;
+            stroke: white;
+            fill: none;
+            stroke-width: 2;
+        }
+
+        .cardd-headerr h3 {
+            font-size: 14px;
+            font-weight: 700;
+            margin: 0;
+        }
+
+        .cardd-headerr p {
+            font-size: 11px;
+            color: #888;
+            margin: 0;
+        }
+
+        /* Body */
+        .cardd-body {
+            background: white;
+            border-radius: 16px;
+            padding: 20px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.06);
+            border: 1px solid #eee;
+            max-width: 450px;
+            font-family: "Inter", sans-serif;
+        }
+
+        /* Circle */
+        .progress-circle {
+            position: relative;
+            width: 120px;
+            height: 120px;
+        }
+
+        .progress-circle svg {
+            transform: rotate(-90deg);
+        }
+
+        .progress-circle circle {
+            fill: none;
+            stroke-width: 9;
+            stroke-linecap: round;
+        }
+
+        .progress-circle .bg {
+            stroke: #eee;
+        }
+
+        .progress-circle .progress {
+            stroke: #933B5B;
+            stroke-dasharray: 345;
+            stroke-dashoffset: 276;
+            /* Change this for different scores */
+            transition: 1s;
+        }
+
+        /* Score */
+
+
+        .score {
+            font-size: 28px;
+            font-weight: 700;
+        }
+
+        .total {
+            font-size: 10px;
+            color: #999;
+        }
+
+        /* Info */
+
+
+        .badge {
+            display: inline-block;
+            background: #ecfdf5;
+            color: #10b981;
+            border: 1px solid #a7f3d0;
+            padding: 5px 12px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: 600;
+        }
+
+        .card-result {
+            background-color: white;
+            border-radius: 16px;
+            padding: 30px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.06);
+            border: 1px solid #eee;
+        }
+    </style>
+</head>
+
+<body>
+    {% if formula_risk is none %}
+    <header class="academic-header">
+        <div class="container">
+            <div class="text-center">
+                <!-- Minimal decorative line -->
+                <div class="header-divider">
+                    <span class="line"></span>
+                    <i class="fas fa-heartbeat"></i>
+                    <span class="line"></span>
+                </div>
+
+                <h1 class="academic-title">
+                    <i class="fas fa-weight me-2"></i>
+                    Obesity Risk Calculator
+                </h1>
+                <p class="header-subtitle">
+                    Assess your risk of being overweight or obese based on your lifestyle habits
+                </p>
+
+                <!-- Simple badge with subtle background -->
+                <a href="#risk-section" class="phd-link">
+                    <div class="phd-badge">
+                        <i class="fas fa-chart-line me-2"></i>
+                        Calculate Your Personal Health Risk
+                    </div>
+                </a>
+
+
+                <!-- Simple health indicators -->
+                <div class="health-indicators">
+                    <div class="indicator-item">
+                        <i class="fas fa-chart-line"></i>
+                        <small>Data Analysis</small>
+                    </div>
+                    <div class="indicator-item">
+                        <i class="fas fa-user-md"></i>
+                        <small>Health Research</small>
+                    </div>
+                    <div class="indicator-item">
+                        <i class="fas fa-calculator"></i>
+                        <small>Risk Assessment</small>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+    <section class="container">
+        <div class="row justify-content-center">
+            <div class="col-lg-10">
+                <div class="calculator-card card">
+                    <div class="card-header">
+                        <h2 class="h4 mb-0 text-white"><i class="fas fa-calculator me-2 text-white"></i>Enter Your
+                            Information</h2>
+                    </div>
+                    <div class="card-body">
+                        <form id="obesityForm" method="post">
+                            <!-- Basic Info -->
+                            <div class="form-section">
+                                <div class="section-header">
+                                    <div class="section-icon">
+                                        <i class="  fas fa-user"></i>
+                                    </div>
+                                    <h3 class="section-title">General Information</h3>
+                                </div>
+
+                                <div class="row">
+                                    <div class="col-md-6 mb-3">
+                                        <label for="age" class="form-label">Age</label>
+                                        <div class="input-group">
+                                            <input type="number" class="form-control" name="age" id="age" required
+                                                min="18">
+
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6 mb-3">
+                                        <label for="gender" class="form-label">Gender</label>
+                                        <select class="form-select" id="gender" name="gender" required>
+                                            <option value="" selected disabled>Select your gender</option>
+                                            <option value="Male">Male</option>
+                                            <option value="Female">Female</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-6 mb-3">
+                                        <label for="height" class="form-label">Height(m)</label>
+                                        <div class="input-group">
+                                            <input type="number" class="form-control" name="height" id="height"
+                                                required>
+
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6 mb-3">
+                                        <label for="weight" class="form-label">Weight(kg)</label>
+                                        <div class="input-group">
+                                            <input type="number" class="form-control" name="weight" id="weight" min="30"
+                                                required>
+
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Eating Habits -->
+                            <div class="form-section">
+                                <div class="section-header">
+                                    <div class="section-icon">
+                                        <i class="fas fa-utensils"></i>
+                                    </div>
+                                    <h3 class="section-title">Eating Habits</h3>
+                                </div>
+
+                                <div class="toggle-container">
+                                    <div class="toggle-card" onclick="toggleSwitch(this)">
+                                        <div class="toggle-content">
+                                            <div class="toggle-icon">
+                                                <i class="fas fa-hamburger"></i>
+                                            </div>
+                                            <div class="toggle-text">Eat fast food regularly</div>
+                                        </div>
+                                        <label class="toggle-switch">
+                                            <input type="checkbox" name="fastfood" value="1">
+                                            <span class="slider"></span>
+                                        </label>
+                                    </div>
+
+                                    <div class="toggle-card" onclick="toggleSwitch(this)">
+                                        <div class="toggle-content">
+                                            <div class="toggle-icon">
+                                                <i class="fas fa-smoking"></i>
+                                            </div>
+                                            <div class="toggle-text">Smoke regularly</div>
+                                        </div>
+                                        <label class="toggle-switch">
+                                            <input type="checkbox" name="smoking" value="1">
+                                            <span class="slider"></span>
+                                        </label>
+                                    </div>
+
+                                    <div class="toggle-card" onclick="toggleSwitch(this)">
+                                        <div class="toggle-content">
+                                            <div class="toggle-icon">
+                                                <i class="fas fa-calculator"></i>
+                                            </div>
+                                            <div class="toggle-text">Track calorie intake</div>
+                                        </div>
+                                        <label class="toggle-switch">
+                                            <input type="checkbox" name="calories" value="1">
+                                            <span class="slider"></span>
+                                        </label>
+                                    </div>
+
+                                    <div class="toggle-card" onclick="toggleSwitch(this)">
+                                        <div class="toggle-content">
+                                            <div class="toggle-icon">
+                                                <i class="fas fa-history"></i>
+                                            </div>
+                                            <div class="toggle-text">Family history of obesity</div>
+                                        </div>
+                                        <label class="toggle-switch">
+                                            <input type="checkbox" name="family_history" value="1">
+                                            <span class="slider"></span>
+                                        </label>
+                                    </div>
+                                </div>
+
+                                <div class="form-range-container">
+                                    <label for="veggies" class="form-label"><i class="fas fa-carrot"></i>Vegetable and
+                                        fruit servings per day</label>
+                                    <input type="range" class="form-range" name="vegetable" id="veggies" min="1" max="3"
+                                        step="1">
+                                    <div class="range-labels">
+                                        <span>Rarely</span>
+                                        <span>Sometimes</span>
+                                        <span>Always</span>
+                                    </div>
+                                </div>
+
+                                <div class="form-range-container">
+                                    <label for="liquid" class="form-label"><i class="fas fa-tint"></i>Liquid intake per
+                                        day</label>
+                                    <input type="range" class="form-range" name="liquid" id="liquid" min="1" max="3"
+                                        step="1">
+                                    <div class="range-labels">
+                                        <span> 1L &lt;</span>
+                                        <span>1–2L</span>
+                                        <span> 2L &gt;</span>
+                                    </div>
+                                </div>
+
+                                <div class="form-range-container">
+                                    <label for="snacks" class="form-label"><i class="fas fa-cookie"></i>Food intake
+                                        between meals</label>
+                                    <input type="range" class="form-range" name="snacks" id="snacks" min="1" max="4"
+                                        step="1">
+                                    <div class="range-labels">
+                                        <span>Rarely</span>
+                                        <span>Sometimes</span>
+                                        <span>Usually</span>
+                                        <span>Always</span>
+                                    </div>
+                                </div>
+
+                                <div class="form-range-container">
+                                    <label for="mainmeals" class="form-label"><i class="fas fa-utensil-spoon"></i>Main
+                                        meals per day</label>
+                                    <input type="range" class="form-range" name="mainmeals" id="mainmeals" min="1"
+                                        max="3" step="1">
+                                    <div class="range-labels">
+                                        <span>1–2</span>
+                                        <span>3</span>
+                                        <span>3+</span>
+                                    </div>
+                                </div>
+
+                                <div class="form-range-container">
+                                    <label for="alcohol" class="form-label"><i class="fas fa-wine-glass"></i>Alcohol
+                                        consumption</label>
+                                    <input type="range" class="form-range" name="alcohol" id="alcohol" min="0" max="3"
+                                        step="1">
+                                    <div class="range-labels">
+                                        <span>No</span>
+                                        <span>Sometimes</span>
+                                        <span>Frequently</span>
+                                        <span>Always</span>
+
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Physical Activity -->
+                            <div class="form-section">
+                                <div class="section-header">
+                                    <div class="section-icon">
+                                        <i class="fas fa-running"></i>
+                                    </div>
+                                    <h3 class="section-title">Physical Activity</h3>
+                                </div>
+                                <div class="row g-4">
+                                    <div class="col-md-4">
+                                        <div class="selection-card">
+                                            <label for="exercise" class="form-label">Physical exercise</label>
+                                            <select name="exercise" id="exercise" class="form-select" required>
+                                                <option value="" disabled selected>-- Choose frequency --</option>
+                                                <option value="0">No physical activity</option>
+                                                <option value="1">1-2 days per week</option>
+                                                <option value="2">3-4 days per week</option>
+                                                <option value="3">5-6 days per week</option>
+                                                <option value="4">6+ days per week</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <div class="selection-card">
+                                            <label for="technology" class="form-label">Time dedicated to
+                                                technology</label>
+                                            <select name="technology" id="technology" class="form-select" required>
+                                                <option value="" disabled selected>-- Choose hours --</option>
+                                                <option value="0">0-2 hours daily</option>
+                                                <option value="1">3-5 hours daily</option>
+                                                <option value="2">5+ hours daily</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <div class="selection-card">
+                                            <label for="transport" class="form-label">Transportation used</label>
+                                            <select name="transport" id="transport" class="form-select" required>
+                                                <option value="" disabled selected>-- Choose method --</option>
+                                                <option value="0">Automobile</option>
+                                                <option value="1">Motorbike</option>
+                                                <option value="2">Bike</option>
+                                                <option value="3">Public transportation</option>
+                                                <option value="4">Walking</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+
+
+
+                            <!-- Modal calculated by formula -->
+                            <div class="modal fade" id="formula1" tabindex="-1" aria-labelledby="modalTitle"
+                                aria-hidden="true">
+                                <div class="modal-dialog modal-dialog-centered modal-lg">
+                                    <div class="modal-content shadow-lg" style="border-radius: 20px; overflow: hidden;">
+
+                                        <!-- Modal Header -->
+                                        <div class="modal-header"
+                                            style="background: linear-gradient(135deg, #3B5BDB, #5A54C9); border: none;">
+                                            <h5 class="modal-title fw-bold" id="modalTitle"
+                                                style="color: white; font-size: 1.4rem;">
+                                                <i class="fas fa-heartbeat me-2"></i>Your Obesity Risk Assessment
+                                            </h5>
+                                            <button type="button" class="btn-close btn-close-white"
+                                                data-bs-dismiss="modal" aria-label="Close"></button>
+                                        </div>
+
+                                        <!-- Modal Body -->
+                                        <div class="modal-body p-4" style="background: #f7f8ff;">
+
+                                            <!-- Risk Score Display -->
+                                            <div class="text-center mb-5">
+                                                <div class="position-relative d-inline-block">
+                                                    <svg width="160" height="160" style="margin-bottom: 10px;">
+                                                        <circle cx="80" cy="80" r="75" fill="none" stroke="#e9ecef"
+                                                            stroke-width="12" />
+                                                        <circle class="risk-circle" cx="80" cy="80" r="75" fill="none"
+                                                            stroke="#3B5BDB" stroke-width="12"
+                                                            style="stroke-dasharray: 471; stroke-dashoffset: 471; transition: stroke-dashoffset 0.6s ease; stroke-linecap: round;" />
+                                                    </svg>
+                                                    <div class="position-absolute"
+                                                        style="top: 50%; left: 50%; transform: translate(-50%, -50%); text-align: center;">
+                                                        <h1 class="mb-0 fw-bold"
+                                                            style="color: #2A2D4A; font-size: 2.5rem; line-height: 1;">
+                                                            <span id="riskScoreModal">--</span>
+                                                        </h1>
+                                                        <small style="color: #7B80A6; font-size: 0.85rem;">out of
+                                                            100</small>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <!-- Risk Level Indicator -->
+                                            <div class="alert" id="riskLevelAlert"
+                                                style="border-radius: 12px; border: none; margin-bottom: 1.5rem;">
+                                                <div class="d-flex align-items-center">
+                                                    <i class="fas fa-shield-alt me-3" style="font-size: 1.5rem;"></i>
+                                                    <div>
+                                                        <strong id="riskLevel">LOW RISK</strong>
+                                                        <p class="mb-0 small" id="riskDescription">Your risk level is
+                                                            low based on current health indicators.</p>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <!-- Risk Breakdown -->
+                                            <div
+                                                style="background: white; padding: 1.5rem; border-radius: 12px; margin-bottom: 1.5rem; border-left: 4px solid #3B5BDB;">
+                                                <h6 class="fw-bold mb-3" style="color: #2A2D4A;">Risk Factors Breakdown
+                                                </h6>
+                                                <div class="row g-3">
+                                                    <div class="col-6">
+                                                        <small style="color: #7B80A6;">Age & Family History</small>
+                                                        <div class="progress"
+                                                            style="height: 8px; border-radius: 4px; background: #e9ecef;">
+                                                            <div class="progress-bar bg-info" id="ageFactorBar"
+                                                                role="progressbar" style="width: 0%" aria-valuenow="0"
+                                                                aria-valuemin="0" aria-valuemax="100"></div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-6">
+                                                        <small style="color: #7B80A6;">Diet & Nutrition</small>
+                                                        <div class="progress"
+                                                            style="height: 8px; border-radius: 4px; background: #e9ecef;">
+                                                            <div class="progress-bar bg-warning" id="dietFactorBar"
+                                                                role="progressbar" style="width: 0%" aria-valuenow="0"
+                                                                aria-valuemin="0" aria-valuemax="100"></div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-6">
+                                                        <small style="color: #7B80A6;">Lifestyle & Exercise</small>
+                                                        <div class="progress"
+                                                            style="height: 8px; border-radius: 4px; background: #e9ecef;">
+                                                            <div class="progress-bar bg-success" id="lifecycleFactorBar"
+                                                                role="progressbar" style="width: 0%" aria-valuenow="0"
+                                                                aria-valuemin="0" aria-valuemax="100"></div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-6">
+                                                        <small style="color: #7B80A6;">Habits & Screen Time</small>
+                                                        <div class="progress"
+                                                            style="height: 8px; border-radius: 4px; background: #e9ecef;">
+                                                            <div class="progress-bar bg-danger" id="habitsFactorBar"
+                                                                role="progressbar" style="width: 0%" aria-valuenow="0"
+                                                                aria-valuemin="0" aria-valuemax="100"></div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <!-- Recommendations -->
+                                            <div
+                                                style="background: white; padding: 1.5rem; border-radius: 12px; border-left: 4px solid #6F7AEF;">
+                                                <h6 class="fw-bold mb-3" style="color: #2A2D4A;">Personalized
+                                                    Recommendations</h6>
+                                                <ul id="recommendationsModal" class="list-group list-group-flush"
+                                                    style="border: none;">
+                                                </ul>
+                                            </div>
+                                        </div>
+                                        <!-- Modal Footer -->
+                                        <div class="modal-footer"
+                                            style="background: #f7f8ff; border-top: 1px solid #e9ecef;">
+                                            <button type="button" class="btn"
+                                                style="background: linear-gradient(135deg, #3B5BDB, #5A54C9); color: white; border: none; border-radius: 8px; padding: 0.6rem 1.5rem; font-weight: 500;"
+                                                data-bs-dismiss="modal">Close</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row mt-4">
+                                <div class="col-md-12 d-grid mt-4">
+                                    <button type="submit" id="method" name="method" value="formula"
+                                        class="btn btn-total">
+                                        <i class="fas fa-chart-line me-2"></i>Calculate Total
+                                    </button>
+
+                                </div>
+                            </div>
+
+                        </form>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    {% endif %}
+    {% if ml_results %}
+    <header class="academic-header">
+        <div class="container">
+            <div class="text-center">
+
+                <div class="header-divider">
+                    <span class="line"></span>
+                    <i class="fas fa-chart-pie"></i>
+                    <span class="line"></span>
+                </div>
+
+                <h1 class="academic-title">
+                    <i class="fas fa-clipboard-check me-2"></i>
+                    Your Health Risk Results
+                </h1>
+
+                <p class="header-subtitle">
+                    A detailed analysis of your obesity risk based on machine learning prediction and lifestyle factors
+                </p>
+
+                <div class="phd-badge">
+                    <i class="fas fa-brain me-2"></i>
+                    AI-Based Prediction Summary
+                </div>
+
+                <div class="health-indicators">
+                    <div class="indicator-item">
+                        <i class="fas fa-percentage"></i>
+                        <small>Risk Score</small>
+                    </div>
+                    <div class="indicator-item">
+                        <i class="fas fa-robot"></i>
+                        <small>ML Models</small>
+                    </div>
+                    <div class="indicator-item">
+                        <i class="fas fa-notes-medical"></i>
+                        <small>Clinical Insight</small>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </header>
+    <section class="container">
+        <div id="mlData" data-values='{{ ml_results | tojson }}'></div>
+
+        <div class="row justify-content-center ">
+            <div class="col-lg-10">
+                <div class="calculator-card card p-lg-2">
+                    {% set highest_prediction = ml_results.values() | max if ml_results else 0 %}
+                    {% set lowest_prediction = ml_results.values() | min if ml_results else 0 %}
+                    {% set avg_prediction = (ml_results.values() | sum) / (ml_results | length) if ml_results else 0 %}
+                    {% set model_icons = {
+                    'Linear Regression': 'fas fa-chart-line',
+                    'Ridge Regression': 'fas fa-sliders-h',
+                    'Lasso Regression': 'fas fa-link',
+                    'ElasticNet': 'fas fa-network-wired',
+                    'Random Forest': 'fas fa-tree',
+                    'Gradient Boosting': 'fas fa-tachometer-alt',
+                    'SVR': 'fas fa-robot',
+                    'K-Neighbors': 'fas fa-users',
+                    'Decision Tree': 'fas fa-code-branch',
+                    'XGBoost': 'fas fa-bolt',
+                    'LightGBM': 'fas fa-lightbulb'
+                    } %}
+                    <div class="card-body">
+
+                        <!-- Basic Info -->
+                        <div class="form-section">
+                            <div class="section-header ai-header">
+
+                                <h3>Composite Health Scores</h3>
+
+
+                            </div>
+
+                            <div class="row">
+                                <div class="col-md-6 mb-3">
+                                    <div class="result-cardd  d-flex flex-column align-items-center text-center my-3 p-4 shadow-sm"
+                                        style="border-radius:16px;">
+                                        <div class="cardd-headerr mb-3">
+                                            <div>
+                                                <h3>Formula Score</h3>
+                                                <p>Weighted factor analysis</p>
+                                            </div>
+                                        </div>
+
+                                        <div class="progress-circle position-relative mb-3">
+                                            <svg width="120" height="120">
+                                                <circle cx="60" cy="60" r="55" class="bg"></circle>
+                                                <circle cx="60" cy="60" r="55" class="progress"
+                                                    id="progressCircleFormula"></circle>
+                                            </svg>
+                                            <div class="position-absolute top-50 start-50 translate-middle">
+                                                <span class="score" id="riskScoreFormula">{{ formula_risk | round(2)
+                                                    }}</span>
+                                                <span class="total">/ 100</span>
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                </div>
+                                <div class="col-md-6 mb-3">
+                                    <div class="result-cardd d-flex flex-column align-items-center text-center my-3 p-4 shadow-sm"
+                                        style="border-radius:16px;">
+                                        <div class="cardd-headerr mb-3">
+                                            <div>
+                                                <h3>AVG Score</h3>
+                                                <p>Weighted factor analysis</p>
+                                            </div>
+                                        </div>
+
+                                        <div class="progress-circle position-relative mb-3">
+                                            <svg width="120" height="120">
+                                                <circle cx="60" cy="60" r="55" class="bg"></circle>
+                                                <circle cx="60" cy="60" r="55" class="progress" id="progressCircleAvg">
+                                                </circle>
+                                            </svg>
+                                            <div class="position-absolute top-50 start-50 translate-middle">
+                                                <span class="score" id="riskScoreAvg">{{ avg_prediction | round(2)
+                                                    }}</span>
+                                                <span class="total">/ 100</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+
+
+                        <!-- chart -->
+                        <div class="form-section">
+                            <div class="section-header ai-header">
+
+                                <h3>Model Comparison</h3>
+
+                            </div>
+                            <div class="col-lg-12 col-sm-12 mx-auto mb-4">
+                                <div class="card shadow-sm border-0" style="border-radius:16px;">
+                                    <div class="card-body">
+                                        <canvas id="modelChart" width="600" height="300"></canvas>
+
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="row justify-content-center my-5">
+                                <div class="col-lg-12 col-sm-12">
+
+                                    <div class="ai-glass p-4 shadow-sm">
+                                        <div class="table-responsive">
+                                            <table class="table table-hover align-middle mb-0 rounded-5">
+
+                                                <thead>
+                                                    <tr>
+                                                        <th>Model</th>
+                                                        <th>Score</th>
+                                                        <th>Risk</th>
+                                                        <th>Vs Formula</th>
+                                                        <th>Difference</th>
+                                                    </tr>
+                                                </thead>
+
+                                                <tbody>
+                                                    {% for model, prediction in ml_results.items() %}
+                                                    <tr>
+
+                                                        <td>
+                                                            <div class="model-chip">
+                                                                <div class="model-icon">
+                                                                    <i
+                                                                        class="{{ model_icons.get(model,'fas fa-robot') }}"></i>
+                                                                </div>
+                                                                {{ model }}
+                                                            </div>
+                                                        </td>
+
+                                                        <td>
+                                                            <span class="score-pill">
+                                                                {{ prediction | round(2) }}%
+                                                            </span>
+                                                        </td>
+
+                                                        <td>
+                                                            {% if prediction < 30 %} <span class="risk low">
+                                                                Low</span>
+                                                                {% elif prediction < 50 %} <span class="risk mid">
+                                                                    Medium</span>
+                                                                    {% else %}
+                                                                    <span class="risk high">High</span>
+                                                                    {% endif %}
+                                                        </td>
+
+                                                        <td>
+                                                            <span class="diff
+                                                         {% if prediction < formula_risk %}good text-success
+                                                         {% elif prediction > formula_risk %}bad text-danger
+                                                         {% else %}neutral
+                                                          {% endif %}">
+                                                                <i class="bi 
+                                                           {% if prediction < formula_risk %}
+                                                            bi-arrow-down
+                                                           text-success
+                                                            {% elif prediction > formula_risk %}
+                                                               bi-arrow-up
+                                                                text-danger
+                                                            {% else %}
+                                                                bi-dash
+                                                                 {% endif %}">
+                                                                </i>
+
+
+                                                                {% if prediction < formula_risk %}Below {% elif
+                                                                    prediction> formula_risk
+                                                                    %}Above
+                                                                    {% else %}Same
+                                                                    {% endif %}
+                                                            </span>
+                                                        </td>
+
+                                                        <td class="fw-bold diff
+              {% if prediction < formula_risk %}good
+              {% elif prediction > formula_risk %}bad
+              {% else %}neutral
+              {% endif %}">
+                                                            {{ (formula_risk - prediction) | round(2) }}%
+                                                        </td>
+
+                                                    </tr>
+                                                    {% endfor %}
+                                                </tbody>
+                                            </table>
+
+                                        </div>
+                                    </div>
+
+                                </div>
+
+                            </div>
+
+
+                        </div>
+
+                        <!-- Ai section -->
+                        <div class="form-section">
+                            <div class="section-header ai-header">
+                                <div class="ai-dot"></div>
+                                <h3>AI Health Assistant</h3>
+                            </div>
+                            <div id="aiBox" class="ai-text">
+                                AI is analyzing your health...
+                            </div>
+
+                        </div>
+
+
+
+                        <!-- Modal calculated by formula -->
+
+                        <div class="row mt-4">
+                            <div class="col-md-12 d-grid mt-4">
+                                <form method="GET">
+                                    <button type="submit" class="btn btn-total fw-bold">
+                                        <i class="fas fa-redo me-2"></i>
+                                        Recalculate Assessment
+                                    </button>
+                                </form>
+
+                            </div>
+                        </div>
+
+
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    {% endif %}
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script>
+       const mlData = document.getElementById("mlData");
+        const mlResults = JSON.parse(mlData.dataset.values);
+
+        const modelNames = Object.keys(mlResults);
+        const modelScores = Object.values(mlResults);
+
+
+        const formulaRisk = {{ formula_risk }};
+
+        if (document.getElementById("modelChart")) {
+
+            // Colors cycle every 4 bars
+            const colors = [
+                "#933B5B", // primary rose
+                "#B55C70", // soft rose
+                "#D69AA2", // light highlight
+                "#7A2E4C"  // deep crimson
+            ];
+
+            const barColors = modelScores.map((v, i) => {
+                const colorIndex = Math.floor(i / 4) % colors.length;
+                return colors[colorIndex];
+            });
+
+            const ctx = document.getElementById("modelChart").getContext("2d");
+
+            new Chart(ctx, {
+                type: "bar",
+                data: {
+                    labels: modelNames,
+                    datasets: [{
+                        label: "Risk Score (%)",
+                        data: modelScores,
+                        backgroundColor: barColors,
+                        borderRadius: 8,
+                        maxBarThickness: 50
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    plugins: {
+                        legend: { display: false },
+                        tooltip: {
+                            callbacks: {
+                                label: ctx => `${ctx.raw.toFixed(3)}%` // 3 digits after comma
+                            }
+                        }
+                    },
+                    scales: {
+                        y: {
+                            min: 0,
+                            max: 100,
+                            title: {
+                                display: true,
+                                text: "Risk Score (%)"
+                            }
+                        },
+                        x: {
+                            ticks: {
+                                maxRotation: 40,
+                                minRotation: 40
+                            }
+                        }
+                    }
+                },
+                plugins: [{
+                    id: "formulaLine",
+                    afterDraw(chart) {
+                        const { ctx, chartArea, scales } = chart;
+                        const y = scales.y.getPixelForValue(formulaRisk);
+
+                        ctx.save();
+                        ctx.setLineDash([8, 6]);
+                        ctx.strokeStyle = "#4A2C33";
+                        ctx.lineWidth = 2;
+                        ctx.beginPath();
+                        ctx.moveTo(chartArea.left, y);
+                        ctx.lineTo(chartArea.right, y);
+                        ctx.stroke();
+
+                        ctx.fillStyle = "#4A2C33";
+                        ctx.font = "15px sans-serif";
+                        ctx.fillText(
+                            `Formula ${formulaRisk.toFixed(3)}%`, // 3 digits
+                            chartArea.right - 120,
+                            y - 6
+                        );
+                        ctx.restore();
+                    }
+                }]
+            });
+        }
+    </script>
+
+    <script src="https://js.puter.com/v2/"></script>
+    <script>
+        function decodeData(raw) {
+            return {
+                ...raw,
+
+                liquid: {
+                    1: "Less than 1 liter per day",
+                    2: "1 to 2 liters per day",
+                    3: "More than 2 liters per day"
+                }[raw.liquid] || raw.liquid,
+
+                vegetable: {
+                    1: "Rarely eats vegetables",
+                    2: "Sometimes eats vegetables",
+                    3: "Eats vegetables always"
+                }[raw.vegetable] || raw.vegetable,
+
+                snacks: {
+                    1: "Rarely snacks",
+                    2: "Sometimes snacks",
+                    3: "Usually snacks",
+                    4: "Always eat snacks"
+                }[raw.snacks] || raw.snacks,
+
+                exercise: {
+                    0: "No exercise",
+                    1: "1-2 times per week",
+                    2: "3-4 times per week",
+                    3: "5-6 times per week",
+                    4: "6+ times per week"
+                }[raw.exercise] || raw.exercise,
+
+                technology: {
+                    0: "0-2 hours per day",
+                    1: "3-5 hours per day",
+                    2: "5+ hours per day"
+                }[raw.technology] || raw.technology,
+
+                transport: {
+                    0: "Automobile",
+                    1: "Motorbike",
+                    2: "Bike",
+                    3: "Public transport",
+                    4: "Walking"
+                }[raw.transport] || raw.transport,
+
+                fastfood: raw.fastfood == 1 ? "Eats fast food frequently" : "Does not eat fast food",
+                calories: raw.calories == 1 ? "Tracks calories" : "Does not track calories",
+                family_history: raw.family_history == 1 ? "Has family history of obesity" : "No family history of obesity"
+            };
+        }
+    </script>
+
+    <script>
+async function getAIRecommendation(data) {
+    const aiBox = document.getElementById("aiBox");
+    aiBox.innerHTML = "AI is thinking...";
+
+    const prompt = `
+You are a friendly, smart, and personalized health AI assistant.
+
+User health profile:
+- Age: ${data.age} years
+- Gender: ${data.gender}
+- Height: ${data.height} m
+- Weight: ${data.weight} kg
+- BMI: ${data.bmi} (${data.bmi < 18.5 ? "underweight" : data.bmi < 25 ? "normal" : data.bmi < 30 ? "overweight" : "obese"})
+- Formula Risk Score: ${data.formula_risk} (${data.formula_risk <= 30 ? "low risk" : data.formula_risk <= 60 ? "medium risk" : "high risk"})
+
+Eating habits:
+- Fast food: ${data.fastfood}
+- Vegetables & fruits: ${data.vegetable}
+- Snacking: ${data.snacks}
+- Main meals per day: ${data.mainmeals}
+- Alcohol use: ${data.alcohol}
+- Daily water intake: ${data.liquid}
+- Tracks calories: ${data.calories}
+- Family history of obesity: ${data.family_history}
+
+Lifestyle:
+- Exercise frequency: ${data.exercise}
+- Daily screen time: ${data.technology}
+- Transport type: ${data.transport}
+
+ML model predictions:
+${JSON.stringify(data.ml_models, null, 2)}
+
+Instructions for you, AI:
+- Analyze all user data, including BMI, formula risk, lifestyle habits, and ML predictions.
+- Consider the numeric scales have been decoded into human-readable text (e.g., exercise = "No exercise", liquid = "Less than 1 liter per day").
+- Give exactly 5 actionable and personalized bullet points.
+- Each bullet must be one short, clear sentence.
+- Include suggestions for foods to eat more, foods to eat less, physical activity, daily habits, and one personalized improvement.
+- Explain numbers or risk scores in simple terms when needed.
+- Use encouraging and positive language.
+- Do not write paragraphs or disclaimers.
+- Focus on practical advice the user can follow immediately.
+
+Format exactly like this:
+• sentence
+• sentence
+• sentence
+• sentence
+• sentence
+`;
+
+    const response = await puter.ai.chat(prompt);
+    const text = response.message.content;
+
+    typeText(aiBox, text);
+}
+</script>
+
+
+
+    <script>
+        const aiData = {
+            age: "{{ request.form.age }}",
+            gender: "{{ request.form.gender }}",
+            height: "{{ request.form.height }}",
+            weight: "{{ request.form.weight }}",
+            bmi: "{{ bmi }}",
+            formula_risk: "{{ formula_risk }}",
+
+            fastfood: "{{ request.form.fastfood or 'No' }}",
+            vegetable: "{{ request.form.vegetable }}",
+            snacks: "{{ request.form.snacks }}",
+            mainmeals: "{{ request.form.mainmeals }}",
+            alcohol: "{{ request.form.alcohol }}",
+            liquid: "{{ request.form.liquid }}",
+            calories: "{{ request.form.calories or 'No' }}",
+            family_history: "{{ request.form.family_history or 'No' }}",
+
+            exercise: "{{ request.form.exercise }}",
+            technology: "{{ request.form.technology }}",
+            transport: "{{ request.form.transport }}",
+
+            ml_models: {{ ml_results | tojson }}
+};
+
+        if (aiData.bmi) {
+            const decoded = decodeData(aiData);
+            getAIRecommendation(decoded);
+        }
+
+    </script>
+
+    <script>
+        function typeText(element, text, speed = 18) {
+            element.innerHTML = "";
+            let i = 0;
+
+            function typing() {
+                if (i < text.length) {
+                    element.innerHTML += text.charAt(i);
+                    i++;
+                    setTimeout(typing, speed);
+                }
+            }
+
+            typing();
+        }
+    </script>
+
+</body>
+
+</html>
