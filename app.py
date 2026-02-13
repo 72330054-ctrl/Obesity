@@ -99,6 +99,8 @@ def index():
     bmi = None
     ml_results = {}
     ai_recommendation = None   
+    best_model = None
+    smallest_diff = None
 
     if request.method == "POST":
         form = request.form
@@ -173,15 +175,25 @@ def index():
             pred = model.predict(X_scaled)[0]
             ml_results[name] = round(float(pred), 3)
         # -----------------------------
-        # Get AI recommendation
-        # -----------------------------
        # -----------------------------
+# Find best ML model (closest to formula)
+# -----------------------------
+        best_model = None
+        smallest_diff = float("inf")
+
+        for model_name, value in ml_results.items():
+            diff = abs(value - formula_risk)
+            if diff < smallest_diff:
+                smallest_diff = diff
+                best_model = model_name
 
     return render_template(
         "index.html",
         formula_risk=formula_risk,
         bmi=bmi,
         ml_results=ml_results,
+        best_model=best_model,
+        smallest_diff=smallest_diff
         
     )
 
